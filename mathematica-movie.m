@@ -36,8 +36,8 @@ While[i <= nargs,
             ];
             Switch[arg,
                 "-g", $renderer = x, (* Render function *)
-                "-j", Check[$step     = FromDigits[x], Print[$usage]; Exit[]],  (* Step size *)
-                "-n", Check[$nframes  = FromDigits[x], Print[$usage]; Exit[]],  (* Total frames *)
+                "-j", Check[$step     = FromDigits[x], Print[$usage]; Exit[]], (* Step size *)
+                "-n", Check[$nframes  = FromDigits[x], Print[$usage]; Exit[]], (* Total frames *)
                 "-p", Check[$nthreads = FromDigits[x], Print[$usage]; Exit[]]; (* Threads *)
                       If[$nthreads==0, $parallel = False],
                 "-w", $movie = False,
