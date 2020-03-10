@@ -59,7 +59,7 @@ If[!DirectoryQ[filespec],
 basedir  = FileNameJoin[Most[FileNameSplit[filespec]]];
 basespec = FileBaseName[filespec];
 files = FileNames[All, filespec];
-$nframes = Min[$nframes, Length[files]]];
+$nframes = Min[$nframes, Length[files]];
 ndigits = IntegerLength[$nframes];
 
 (* Create frames directory *)
@@ -103,7 +103,7 @@ Print["\n"];
 
 (* Make the movie *)
 If[TrueQ[$movie],
-    movopts = "-r 24 -y -preset slow -c:v libx265 -crf 17 -pix_fmt yuv420p -tag:v hvc1 -movflags faststart";
+    movopts = "-r 24 -y -preset slow -c:v libx265 -crf 17 -vf \"pad=ceil(iw/2)*2:ceil(ih/2)*2\" -pix_fmt yuv420p -tag:v hvc1 -movflags faststart";
     frameformat = FileNameJoin[{framedir, basespec <> "_%" <> ToString[ndigits] <> "d.png"}];
-    Run[StringTemplate["ffmpeg -i `` `` ``.mov"][frameformat, movopts, basespec]];
+    Run[StringTemplate["ffmpeg -i `` `` ``.mov"][frameformat, movopts, FileNameJoin[{basedir, basespec}]]];
 ];
